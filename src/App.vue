@@ -1,16 +1,20 @@
 <template>
   <div id="app">
-    <h1 class="title">Todos</h1>
-    <Todos v-bind:todos="todos" />
+    <div class="title-container"><h1 class="title">Todos</h1></div>
+    <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo" />
+    <div>
+      <AddTodo v-on:add-new-todo="addNewTodo" />
+    </div>
   </div>
 </template>
 
 <script>
 import Todos from "./components/Todos";
+import AddTodo from "./components/AddTodo";
 
 export default {
   name: "App",
-  components: { Todos },
+  components: { Todos, AddTodo },
   data() {
     return {
       todos: [
@@ -51,6 +55,15 @@ export default {
         }
       ]
     };
+  },
+  methods:{
+    deleteTodo(id){
+      this.todos = this.todos.filter(todo => todo.id !== id);
+    },
+    addNewTodo(newTodo){
+      this.todos = [...this.todos, newTodo];
+      console.log(this.todos);
+    }
   }
 };
 </script>
@@ -66,9 +79,21 @@ body {
   line-height: 1.5;
   background-color: whitesmoke;
 }
+.title-container{
+  min-width: 100vw;
+  position: fixed;
+  top:0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 5rem lightseagreen;
+  background-color: #20b2abad;
+  border-bottom: 3px solid lightseagreen;
+}
 .title{
   text-align: center;
   color: darkslategray;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div v-bind:key="todo.key" v-for="todo in todos">
-            <TodoItem v-bind:todo="todo"/>
+            <TodoItem v-bind:todo="todo" v-on:del-todo="$emit('del-todo', todo.id)"/>
         </div>
     </div>
 </template>
@@ -22,5 +22,7 @@ export default {
 <style scoped>
     .container{
         padding: 2rem;
+        margin-bottom: 5rem;
+        margin-top: 5rem;
     }
 </style>

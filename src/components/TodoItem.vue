@@ -3,6 +3,7 @@
      class="todo-item" v-bind:class="{'todo-item-complete': todo.completed }"
      v-on:click="onClick">
         <p>{{todo.title}}</p>
+        <p @click="$emit('del-todo',todo.id)">❌</p>
     </div>
 </template>
 
@@ -27,14 +28,19 @@ export default {
         margin-bottom: 0.5rem;
     }
     .todo-item{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
         background-color: antiquewhite;
         padding: 1rem;
         border-bottom: 3px solid lightcoral;
     }
     .todo-item-complete{
         display: flex;
+        flex-direction: row;
         align-items: center;
-        justify-content: left;
+        justify-content: space-between;
         color: lightyellow;
         background-color: lightseagreen;
         border-bottom: 3px solid darkgreen;
